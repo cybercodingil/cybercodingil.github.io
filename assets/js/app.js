@@ -271,19 +271,25 @@
   // ---------------------------------------------------------------- pages
   // ---------------------------------------------------------------- Code-Iot look: clouds + drifting code words
   var CODE_IOT_URL = "https://code-iot.onrender.com/welcome";
-  var CODE_WORDS = ["print()", "def", "import", "for i in range()", "if:", "else:", "return", "while", "class", "True", "False",
+  var CODE_WORDS = ["print()", "def", "import", "for", "if:", "else:", "return", "while", "class", "True", "False",
     "None", "len()", "input()", "range()", "[]", "{}", "lambda", "self", "elif", "try:", "except", "map()", "f\"{x}\""];
 
-  // Same pseudo-random layout on every visit (seeded), so the page doesn't jump around between loads.
+  // Words rise in vertical lanes spread across the width; the two words sharing a lane move at the same
+  // speed half a cycle apart, so words never overlap. Seeded, so the layout is the same on every visit.
   function codeWords(count, seed) {
     var x = seed * 9301 + 49297;
     function rnd() { x = (x * 9301 + 49297) % 233280; return x / 233280; }
-    var out = "";
-    for (var i = 0; i < count; i++) {
-      var dur = 14 + rnd() * 16;
-      out += '<span class="code-word" style="left:' + (2 + rnd() * 88).toFixed(1) + "%;font-size:" + (0.85 + rnd() * 0.6).toFixed(2) +
-        "rem;--float-duration:" + dur.toFixed(1) + "s;animation-delay:-" + (rnd() * dur).toFixed(1) + "s;--drift:" + Math.round(rnd() * 80 - 40) + 'px">' +
-        esc(CODE_WORDS[Math.floor(rnd() * CODE_WORDS.length)]) + "</span>";
+    var words = CODE_WORDS.slice();
+    for (var k = words.length - 1; k > 0; k--) { var r = Math.floor(rnd() * (k + 1)); var tmp = words[k]; words[k] = words[r]; words[r] = tmp; }
+    var lanes = Math.ceil(count / 2), out = "", n = 0;
+    for (var lane = 0; lane < lanes; lane++) {
+      var left = ((lane + 0.5) / lanes) * 92 + 1 + (rnd() * 4 - 2);
+      var dur = 18 + rnd() * 12, start = rnd() * dur, size = (0.9 + rnd() * 0.5).toFixed(2);
+      for (var w = 0; w < 2 && n < count; w++, n++) {
+        out += '<span class="code-word' + (lane % 3 ? " lane-extra" : "") + '" style="left:' + left.toFixed(1) + "%;font-size:" + size +
+          "rem;--float-duration:" + dur.toFixed(1) + "s;animation-delay:-" + ((start + w * dur / 2) % dur).toFixed(1) +
+          "s;--drift:" + Math.round(rnd() * 30 - 15) + 'px">' + esc(words[n % words.length]) + "</span>";
+      }
     }
     return out;
   }
@@ -330,7 +336,7 @@
       '<style></style>' +
       '<section class="hero-section relative py-12 md:py-20 overflow-hidden"><div class="relative"><div class="text-center">' +
         // Clouds + drifting code words behind the character (same look as the Code-Iot app).
-        '<div class="hero-sky soft mb-8">' +
+        '<div class="hero-sky full glow mb-8">' +
           '<div class="hero-sky-bg" aria-hidden="true">' + codeWords(18, 1) + "</div>" +
           '<div class="hero-sky-content flex justify-center"><div class="glitch-container">' +
             '<img src="' + IMG + 'instructor.png" alt="Tech Instructor" class="glitch-image w-64 h-64 md:w-96 md:h-96 object-contain">' +

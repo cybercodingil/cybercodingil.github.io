@@ -150,3 +150,21 @@ html, body { overflow-x: hidden; }
 }
 /* The hero section normally clips its content; let the full-width sky reach the screen edges */
 .hero-section:has(.hero-sky.full) { overflow: visible; }
+
+/* Hero character: a bit larger on wide screens, so it fills the full-width sky */
+@media (min-width: 1024px) {
+  .hero-sky.full .glitch-image { width: 30rem; height: 30rem; }
+}
+/* Option B: soft light glow behind the character + faint shadow beneath it */
+.hero-sky.glow .glitch-container::before {
+  content: ""; position: absolute; inset: 6% 2% 4%; z-index: -1; border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(255,255,255,.95), rgba(255,255,255,.6) 50%, rgba(255,255,255,0));
+  filter: blur(6px);
+}
+.hero-sky.glow .glitch-container::after {
+  content: ""; position: absolute; left: 22%; right: 22%; bottom: -2%; height: 7%; z-index: -1; border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(20,40,90,.35), rgba(20,40,90,0));
+}
+.hero-sky.glow .glitch-container { isolation: isolate; }
+/* Phones and tablets: fewer lanes of code words so they have room and never overlap */
+@media (max-width: 1023px) { .code-word.lane-extra { display: none; } }
