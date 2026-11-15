@@ -30,6 +30,10 @@ No build step — plain HTML/CSS/JS.
 
 `.claude/skills/whatsapp-message/SKILL.md` – a Claude Code skill. In a Claude Code session on this repository, type `/whatsapp-message` (optionally with a topic, audience or occasion, e.g. `/whatsapp-message הורים, לקראת חופש`) to get a ready-to-paste WhatsApp message built from the site's facts. It is not published on the website.
 
+## Facebook content skill
+
+`.claude/skills/facebook-post/SKILL.md` – type `/facebook-post` in a Claude Code session on this repository for a Facebook post, a longer Facebook article (`מאמר`) or a list of post ideas (`רעיונות`) about cybersecurity and programming, always ending with a link to the site. Not published on the website.
+
 ## Contact form
 
 GitHub Pages has no server, so the form sends messages by email through [Formspree](https://formspree.io).
