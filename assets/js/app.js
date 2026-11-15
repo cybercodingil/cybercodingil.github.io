@@ -225,10 +225,10 @@
 
     return '<div class="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 text-gray-900 ' + (dir() === "rtl" ? "text-right" : "text-left") + '">' +
       '<nav class="bg-white border-b border-gray-200">' +
-        '<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"><div class="flex justify-between h-16">' +
-          // Logo + site name removed at the owner's request; the empty div keeps the menu on the same side.
-          '<div class="flex items-center"></div>' +
-          '<div class="hidden md:flex items-center space-x-4">' +
+        '<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"><div class="flex h-16">' +
+          // No logo (removed at the owner's request): the menu starts on the reading side —
+          // left in English, right in Hebrew.
+          '<div class="hidden md:flex items-center gap-4">' +
             nav.map(function (n) { return '<a href="' + pageUrl(n.page) + '" class="px-3 py-2 rounded-md hover:bg-gray-100">' + L(n.id) + "</a>"; }).join("") +
             '<div class="flex items-center gap-2">' + langBtn("en", "English") + langBtn("he", "עברית") + "</div>" +
           "</div>" +
@@ -238,7 +238,7 @@
         (menuOpen ?
           '<div class="md:hidden"><div class="px-2 pt-2 pb-3 space-y-1">' +
             nav.map(function (n) { return '<a href="' + pageUrl(n.page) + '" class="block px-3 py-2 rounded-md hover:bg-gray-100">' + L(n.id) + "</a>"; }).join("") +
-            '<div class="flex space-x-2 px-3 py-2">' + mobileLangBtn("en", "English") + mobileLangBtn("he", "עברית") + "</div>" +
+            '<div class="flex gap-2 px-3 py-2">' + mobileLangBtn("en", "English") + mobileLangBtn("he", "עברית") + "</div>" +
           "</div></div>" : "") +
       "</nav>" +
       '<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">' + content + "</main>" +
