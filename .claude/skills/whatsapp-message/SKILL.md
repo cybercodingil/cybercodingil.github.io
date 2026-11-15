@@ -1,6 +1,6 @@
 ---
 name: whatsapp-message
-description: Write a ready-to-paste WhatsApp promotional message (Hebrew by default) for Tamir's Cyber</>Coding lessons, using only facts from this website. Use when Tamir asks for a WhatsApp message, a post for WhatsApp groups, a promo text for a specific audience or occasion, or invokes /whatsapp-message. Accepts an optional topic, audience, occasion, article, number of versions, or language.
+description: Write a ready-to-paste WhatsApp promotional message (Hebrew by default) for Tamir's CyberCoding lessons, using only facts from this website. Use when Tamir asks for a WhatsApp message, a post for WhatsApp groups, a promo text for a specific audience or occasion, or invokes /whatsapp-message. Accepts an optional topic, audience, occasion, article, number of versions, or language.
 ---
 
 # WhatsApp message for Cyber</>Coding

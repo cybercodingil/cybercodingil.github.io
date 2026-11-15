@@ -1,6 +1,6 @@
 ---
 name: facebook-post
-description: Create Facebook content for Tamir's Cyber</>Coding lessons – educational posts, short Facebook articles, lists of post ideas, or short catchy cyber/coding sentences – about cybersecurity and programming only, always ending with a link to the website. Hebrew by default. Use when Tamir asks for a Facebook post, a Facebook article, ideas for Facebook content, a content plan for Facebook, catchy/intriguing cyber or programming sentences (quotes, one-liners, "did you know", for posts, stories or images), or invokes /facebook-post. Accepts an optional mode (post / article / ideas / sentences), topic, audience, blog article, length, number of versions, or language.
+description: Create Facebook content for Tamir's CyberCoding lessons – educational posts, short Facebook articles, lists of post ideas, or short catchy cyber/coding sentences – about cybersecurity and programming only, always ending with a link to the website. Hebrew by default. Use when Tamir asks for a Facebook post, a Facebook article, ideas for Facebook content, a content plan for Facebook, catchy/intriguing cyber or programming sentences (quotes, one-liners, "did you know", for posts, stories or images), or invokes /facebook-post. Accepts an optional mode (post / article / ideas / sentences), topic, audience, blog article, length, number of versions, or language.
 ---
 
 # Facebook content for Cyber</>Coding
