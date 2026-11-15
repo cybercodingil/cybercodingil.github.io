@@ -33,11 +33,11 @@
 /* Avoid sideways scrolling on small phones */
 html, body { overflow-x: hidden; }
 
-/* Floating WhatsApp button (inset-inline-end puts it on the right in English, left in Hebrew) */
+/* Floating WhatsApp button — always bottom-right, in both languages */
 .whatsapp-float {
   position: fixed;
   bottom: 20px;
-  inset-inline-end: 20px;
+  right: 20px;
   z-index: 50;
   width: 56px;
   height: 56px;

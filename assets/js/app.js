@@ -248,7 +248,7 @@
       '<footer class="bg-white border-t border-gray-200 mt-12"><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">' +
         '<div class="text-center text-sm text-gray-500">© ' + new Date().getFullYear() + " Cyber&lt;/&gt;Coding. " + L("allRightsReserved") + ".</div>" +
       "</div></footer>" +
-      // Floating WhatsApp button, on the end side of the reading direction (right in English, left in Hebrew).
+      // Floating WhatsApp button (bottom-right corner in both languages; see .whatsapp-float in site.css).
       '<a href="https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(L("whatsappText")) + '" target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="' + esc(L("whatsappLabel")) + '" title="' + esc(L("whatsappLabel")) + '">' +
         icon("message-circle", "", 28) + "</a>" +
     "</div>";
