@@ -140,3 +140,13 @@ html, body { overflow-x: hidden; }
 }
 .app-cta:hover { transform: translateY(1px); box-shadow: 0 3px 0 #c48a00; }
 .app-cta:active { transform: translateY(4px); box-shadow: 0 0 0 #c48a00; }
+
+/* Variant "full": sky across the whole screen width, fading only at the top and bottom */
+.hero-sky.full .hero-sky-bg {
+  width: 100vw; top: -110px; bottom: -50px;
+  --sky-mask: linear-gradient(to bottom,
+    transparent 0%, rgba(0,0,0,.25) 8%, rgba(0,0,0,.7) 18%, #000 30%,
+    #000 62%, rgba(0,0,0,.7) 76%, rgba(0,0,0,.25) 90%, transparent 100%);
+}
+/* The hero section normally clips its content; let the full-width sky reach the screen edges */
+.hero-section:has(.hero-sky.full) { overflow: visible; }

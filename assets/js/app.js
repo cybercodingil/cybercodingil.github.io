@@ -328,7 +328,7 @@
     return '<div class="space-y-16" dir="' + dir() + '">' +
       // The original renders a <style> tag first, which gives the hero the space-y-16 top margin.
       '<style></style>' +
-      '<section class="relative py-12 md:py-20 overflow-hidden"><div class="relative"><div class="text-center">' +
+      '<section class="hero-section relative py-12 md:py-20 overflow-hidden"><div class="relative"><div class="text-center">' +
         // Clouds + drifting code words behind the character (same look as the Code-Iot app).
         '<div class="hero-sky soft mb-8">' +
           '<div class="hero-sky-bg" aria-hidden="true">' + codeWords(18, 1) + "</div>" +
