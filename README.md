@@ -32,7 +32,7 @@ No build step — plain HTML/CSS/JS.
 
 ## Facebook content skill
 
-`.claude/skills/facebook-post/SKILL.md` – type `/facebook-post` in a Claude Code session on this repository for a Facebook post, a longer Facebook article (`מאמר`) or a list of post ideas (`רעיונות`) about cybersecurity and programming, always ending with a link to the site. Not published on the website.
+`.claude/skills/facebook-post/SKILL.md` – type `/facebook-post` in a Claude Code session on this repository for a Facebook post, a longer Facebook article (`מאמר`), a list of post ideas (`רעיונות`) or short catchy cyber/programming sentences (`משפטים`) about cybersecurity and programming, always ending with a link to the site. Not published on the website.
 
 ## Contact form
 
