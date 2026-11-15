@@ -32,6 +32,10 @@ GitHub Pages has no server, so the form sends messages by email through [Formspr
 Set `FORMSPREE_FORM_ID` at the top of `assets/js/app.js` to your form ID (the part after `https://formspree.io/f/`).
 While it is empty, the form opens WhatsApp with the visitor's details and message pre-filled instead.
 
+## Address
+
+The site is published at **https://cybercodingil.github.io** (repository `cybercodingil/cybercodingil.github.io`).
+
 ## Deploy
 
 1. Merge to `main`.

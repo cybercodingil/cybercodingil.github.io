@@ -18,9 +18,8 @@
           }
         }
       }
-      // GitHub project sites live under /<repo>/; keep that prefix when going home.
-      var prefix = location.hostname.endsWith("github.io") && parts.length ? "/" + parts[0] + "/" : "/";
-      location.replace(prefix);
+      // The site lives at the root of cybercodingil.github.io, so anything unknown goes to the home page.
+      location.replace("/");
     })();
   </script>
 </head>
