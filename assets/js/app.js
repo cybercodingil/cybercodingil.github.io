@@ -85,7 +85,14 @@
         handsOnDesc: "Build your portfolio with practical projects and real tools.",
         readyToStart: "Ready to Start Your Journey?",
         takeFirstStep: 'Take the first step towards "breaking into" the world of cyber and programming. Book your first lesson today!',
-        getStartedNow: "Get Started Now"
+        getStartedNow: "Get Started Now",
+        appBadge: "Free bonus for Python students",
+        appTitle: "The Code-Iot app – included with your lessons",
+        appDesc: "Every student who joins the Python lessons gets free access to Code-Iot, a coding app I built to accompany the lessons.",
+        appPoint1: "Keep practicing between lessons – on your phone or computer",
+        appPoint2: "Learn anywhere, anytime",
+        appPoint3: "No extra cost – it comes with the lessons",
+        appCta: "Take a look at the app"
       },
       he: {
         heroTitle: "עולם התכנות והסייבר",
@@ -109,7 +116,14 @@
         handsOnDesc: "בנה את התיק שלך עם פרויקטים מעשיים וכלים אמיתיים",
         readyToStart: "מוכן להתחיל את המסע שלך?",
         takeFirstStep: 'עשה את הצעד הראשון לקראת "פריצה" לעולם הסייבר והתכנות. הזמן את השיעור הראשון שלך עוד היום!',
-        getStartedNow: "התחל עכשיו"
+        getStartedNow: "התחל עכשיו",
+        appBadge: "בונוס חינם לתלמידי פייתון",
+        appTitle: "אפליקציית Code-Iot – כלולה בשיעורים",
+        appDesc: "כל תלמיד שמצטרף לשיעורי פייתון מקבל גישה חינם ל-Code-Iot, אפליקציה ללימוד תכנות שפיתחתי במיוחד כדי ללוות את השיעורים.",
+        appPoint1: "ממשיכים לתרגל בין השיעורים – בטלפון או במחשב",
+        appPoint2: "לומדים מכל מקום ובכל זמן",
+        appPoint3: "בלי עלות נוספת – כלול בשיעורים",
+        appCta: "להצצה באפליקציה"
       }
     },
     about: {
@@ -255,6 +269,47 @@
   }
 
   // ---------------------------------------------------------------- pages
+  // ---------------------------------------------------------------- Code-Iot look: clouds + drifting code words
+  var CODE_IOT_URL = "https://code-iot.onrender.com/welcome";
+  var CODE_WORDS = ["print()", "def", "import", "for i in range()", "if:", "else:", "return", "while", "class", "True", "False",
+    "None", "len()", "input()", "range()", "[]", "{}", "lambda", "self", "elif", "try:", "except", "map()", "f\"{x}\""];
+
+  // Same pseudo-random layout on every visit (seeded), so the page doesn't jump around between loads.
+  function codeWords(count, seed) {
+    var x = seed * 9301 + 49297;
+    function rnd() { x = (x * 9301 + 49297) % 233280; return x / 233280; }
+    var out = "";
+    for (var i = 0; i < count; i++) {
+      var dur = 14 + rnd() * 16;
+      out += '<span class="code-word" style="left:' + (2 + rnd() * 88).toFixed(1) + "%;font-size:" + (0.85 + rnd() * 0.6).toFixed(2) +
+        "rem;--float-duration:" + dur.toFixed(1) + "s;animation-delay:-" + (rnd() * dur).toFixed(1) + "s;--drift:" + Math.round(rnd() * 80 - 40) + 'px">' +
+        esc(CODE_WORDS[Math.floor(rnd() * CODE_WORDS.length)]) + "</span>";
+    }
+    return out;
+  }
+
+  function renderAppPromo() {
+    var a = function (k) { return esc(t("home", k)); };
+    return '<section class="py-12"><div class="app-promo">' +
+      '<div class="app-promo-bg" aria-hidden="true">' + codeWords(14, 7) + "</div>" +
+      '<div class="app-promo-inner">' +
+        '<div class="app-promo-brand">' +
+          '<div class="app-logo-mark"><img src="' + IMG + 'code-iot.png" alt="Code-Iot" loading="lazy"></div>' +
+          '<div class="app-logo-title">Code-Iot</div>' +
+        "</div>" +
+        '<div class="app-promo-card">' +
+          '<span class="app-badge">' + a("appBadge") + "</span>" +
+          '<h2 class="app-promo-title">' + a("appTitle") + "</h2>" +
+          '<p class="app-promo-desc">' + a("appDesc") + "</p>" +
+          '<ul class="app-promo-list">' +
+            ["appPoint1", "appPoint2", "appPoint3"].map(function (k) { return "<li>" + a(k) + "</li>"; }).join("") +
+          "</ul>" +
+          '<a class="app-cta" href="' + CODE_IOT_URL + '" target="_blank" rel="noopener noreferrer">' + a("appCta") + "</a>" +
+        "</div>" +
+      "</div>" +
+    "</div></section>";
+  }
+
   function renderHome() {
     var a = function (k) { return esc(t("home", k)); };
     var rtl = dir() === "rtl";
@@ -274,9 +329,13 @@
       // The original renders a <style> tag first, which gives the hero the space-y-16 top margin.
       '<style></style>' +
       '<section class="relative py-12 md:py-20 overflow-hidden"><div class="relative"><div class="text-center">' +
-        '<div class="mb-8 flex justify-center"><div class="glitch-container">' +
-          '<img src="' + IMG + 'instructor.png" alt="Tech Instructor" class="glitch-image w-64 h-64 md:w-96 md:h-96 object-contain">' +
-        "</div></div>" +
+        // Clouds + drifting code words behind the character (same look as the Code-Iot app).
+        '<div class="hero-sky soft mb-8">' +
+          '<div class="hero-sky-bg" aria-hidden="true">' + codeWords(18, 1) + "</div>" +
+          '<div class="hero-sky-content flex justify-center"><div class="glitch-container">' +
+            '<img src="' + IMG + 'instructor.png" alt="Tech Instructor" class="glitch-image w-64 h-64 md:w-96 md:h-96 object-contain">' +
+          "</div></div>" +
+        "</div>" +
         '<h1 class="text-4xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-cyan-500 pb-4">' + a("heroTitle") + "</h1>" +
         '<p class="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto">' + a("heroSubtitle") + "</p>" +
         '<div class="flex flex-col sm:flex-row justify-center gap-4">' +
@@ -293,6 +352,8 @@
             '<p class="text-gray-600">' + a(f.desc) + "</p></div>";
         }).join("") +
       "</div></section>" +
+
+      renderAppPromo() +
 
       '<section class="py-12"><div class="grid md:grid-cols-2 gap-12 items-center ' + (rtl ? "md:grid-flow-dense" : "") + '">' +
         '<div><h2 class="text-3xl font-bold mb-6">' + a("whyLearnWithMe") + '</h2><div class="space-y-4">' +
