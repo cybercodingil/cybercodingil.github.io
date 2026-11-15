@@ -89,6 +89,7 @@
         appBadge: "Free bonus for Python students",
         appTitle: "The Code-Iot app – included with your lessons",
         appDesc: "Every student who joins the Python lessons gets free access to Code-Iot, a coding app I built to accompany the lessons.",
+        appPointLang: "Learn in Hebrew (or English) – something rare among coding apps worldwide",
         appPoint1: "Keep practicing between lessons – on your phone or computer",
         appPoint2: "Learn anywhere, anytime",
         appPoint3: "No extra cost – it comes with the lessons",
@@ -120,6 +121,7 @@
         appBadge: "בונוס חינם לתלמידי פייתון",
         appTitle: "אפליקציית Code-Iot – כלולה בשיעורים",
         appDesc: "כל תלמיד שמצטרף לשיעורי פייתון מקבל גישה חינם ל-Code-Iot, אפליקציה ללימוד תכנות שפיתחתי במיוחד כדי ללוות את השיעורים.",
+        appPointLang: "לומדים תכנות בעברית – דבר נדיר באפליקציות לימוד תכנות בעולם",
         appPoint1: "ממשיכים לתרגל בין השיעורים – בטלפון או במחשב",
         appPoint2: "לומדים מכל מקום ובכל זמן",
         appPoint3: "בלי עלות נוספת – כלול בשיעורים",
@@ -304,7 +306,7 @@
           '<h2 class="app-promo-title">' + a("appTitle") + "</h2>" +
           '<p class="app-promo-desc">' + a("appDesc") + "</p>" +
           '<ul class="app-promo-list">' +
-            ["appPoint1", "appPoint2", "appPoint3"].map(function (k) { return "<li>" + a(k) + "</li>"; }).join("") +
+            ["appPointLang", "appPoint1", "appPoint2", "appPoint3"].map(function (k) { return "<li>" + a(k) + "</li>"; }).join("") +
           "</ul>" +
           '<a class="app-cta" href="' + CODE_IOT_URL + '" target="_blank" rel="noopener noreferrer">' + a("appCta") + "</a>" +
         "</div>" +
