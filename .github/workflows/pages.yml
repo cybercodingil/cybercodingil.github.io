@@ -23,6 +23,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/configure-pages@v5
+      # Claude Code skills and settings are for working on the site, not part of the website itself.
+      - run: rm -rf .claude
       - uses: actions/upload-pages-artifact@v3
         with:
           path: .

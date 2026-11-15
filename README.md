@@ -26,6 +26,10 @@ No build step — plain HTML/CSS/JS.
 - **Default language:** Hebrew. Visitors' language choice is remembered in their browser.
 - **Contact links:** `WHATSAPP_NUMBER`, `FACEBOOK_URL`, `LINKEDIN_URL` at the top of `assets/js/app.js`.
 
+## WhatsApp message skill
+
+`.claude/skills/whatsapp-message/SKILL.md` – a Claude Code skill. In a Claude Code session on this repository, type `/whatsapp-message` (optionally with a topic, audience or occasion, e.g. `/whatsapp-message הורים, לקראת חופש`) to get a ready-to-paste WhatsApp message built from the site's facts. It is not published on the website.
+
 ## Contact form
 
 GitHub Pages has no server, so the form sends messages by email through [Formspree](https://formspree.io).
