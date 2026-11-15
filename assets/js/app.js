@@ -167,8 +167,8 @@
       }
     },
     blog: {
-      en: { blogTitle: "Blog & Resources", blogSubtitle: "Latest articles, tutorials, and resources on cybersecurity and programming.", readMore: "Read More", categories: "Categories", cybersecurity: "Cybersecurity", programming: "Programming", ethical_hacking: "Ethical Hacking", web_security: "Web Security", searchPlaceholder: "Search articles...", noBlogPosts: "No blog posts found." },
-      he: { blogTitle: "בלוג ומשאבים", blogSubtitle: "מאמרים, הדרכות ומשאבים אחרונים בנושא אבטחת סייבר ותכנות", readMore: "קרא עוד", categories: "קטגוריות", cybersecurity: "אבטחת סייבר", programming: "תכנות", ethical_hacking: "האקינג אתי", web_security: "אבטחת אתרים", searchPlaceholder: "חפש מאמרים...", noBlogPosts: "לא נמצאו פוסטים בבלוג." }
+      en: { blogTitle: "Blog & Resources", blogSubtitle: "Latest articles, tutorials, and resources on cybersecurity and programming.", readMore: "Read More", all: "All", categories: "Categories", cybersecurity: "Cybersecurity", programming: "Programming", ethical_hacking: "Ethical Hacking", web_security: "Web Security", searchPlaceholder: "Search articles...", noBlogPosts: "No blog posts found.", backToBlog: "Back to the blog", minRead: "min read", notFound: "This article wasn't found.", ctaTitle: "Want to learn this hands-on?", ctaText: "Private and group lessons in programming and cybersecurity, for kids and adults.", ctaButton: "Contact me" },
+      he: { blogTitle: "בלוג ומשאבים", blogSubtitle: "מאמרים, הדרכות ומשאבים אחרונים בנושא אבטחת סייבר ותכנות", readMore: "קרא עוד", all: "הכל", categories: "קטגוריות", cybersecurity: "אבטחת סייבר", programming: "תכנות", ethical_hacking: "האקינג אתי", web_security: "אבטחת אתרים", searchPlaceholder: "חפש מאמרים...", noBlogPosts: "לא נמצאו פוסטים בבלוג.", backToBlog: "חזרה לבלוג", minRead: "דקות קריאה", notFound: "המאמר לא נמצא.", ctaTitle: "רוצים ללמוד את זה בפועל?", ctaText: "שיעורים פרטיים וקבוצתיים בתכנות ובסייבר, לילדים ולמבוגרים.", ctaButton: "צרו קשר" }
     },
     contact: {
       en: { contactTitle: "Contact Me", contactSubtitle: "Have questions? Fill out the form below to get in touch with me directly.", contactMe: "Contact Me", yourName: "Your Name", yourEmail: "Your Email", yourPhone: "Your Phone", yourMessage: "Your Message", submit: "Submit", thankYou: "Thank you for your message!", getBackToYou: "I'll get back to you as soon as possible.", sending: "Sending...", sendError: "Something went wrong and the message was not sent. Please try again, or contact me on WhatsApp.", connectWithMe: "Connect With Me", facebook: "Facebook", whatsapp: "WhatsApp", linkedin: "LinkedIn" },
@@ -176,16 +176,12 @@
     }
   };
 
-  // Blog posts (exported from the original site's database), newest first.
-  var BLOG_POSTS = [
-    { id: "67d1662067d59189de380713", language: "en", category: "cybersecurity", title: "The Importance of Network Segmentation", content: "Network segmentation is a crucial security strategy that can limit the damage of a breach. This post explores best practices for implementing effective network segmentation." },
-    { id: "67d1662067d59189de380712", language: "en", category: "programming", title: "Getting Started with Python for Cybersecurity", content: "Python is an essential tool for cybersecurity professionals. Here's how to get started using Python for security testing and automation." },
-    { id: "67d1662067d59189de380711", language: "en", category: "web_security", title: "Understanding XSS (Cross-Site Scripting) Attacks", content: "Cross-Site Scripting (XSS) is one of the most common web application vulnerabilities. Learn how to identify and prevent XSS attacks in your applications." },
-    { id: "67d163b3b40dbbf86b62cf6e", language: "he", category: "programming", title: "תחילת העבודה עם פייתון לאבטחת סייבר", content: "פייתון הוא כלי חיוני עבור אנשי מקצוע בתחום הסייבר. הנה כיצד להתחיל להשתמש בפייתון לבדיקות אבטחה ואוטומציה." },
-    { id: "67d163b3b40dbbf86b62cf6d", language: "he", category: "web_security", title: "הבנת התקפות XSS (Cross-Site Scripting)", content: "Cross-Site Scripting (XSS) היא אחת מפגיעויות אבטחת האתרים הנפוצות ביותר. למד כיצד לזהות ולמנוע התקפות XSS ביישומים שלך." },
-    { id: "67d05021afef5c556afb2943", language: "en", category: "programming", title: "Getting Started with Python for Cybersecurity", content: "Python is an essential tool for cybersecurity professionals. Here's how to start using Python for security testing and automation." },
-    { id: "67d05021afef5c556afb2942", language: "en", category: "web_security", title: "Understanding Cross-Site Scripting (XSS) Attacks", content: "Cross-Site Scripting (XSS) is one of the most common web security vulnerabilities. Learn how to identify and prevent XSS attacks in your applications." }
-  ];
+  // Blog articles live in assets/js/posts.js (Hebrew + English side by side).
+  var BLOG_POSTS = window.CC_POSTS || [];
+  var CURRENT_POST = (function () {
+    var m = /[?&]post=([^&#]+)/.exec(location.search);
+    return m ? decodeURIComponent(m[1]) : null;
+  })();
 
   // ---------------------------------------------------------------- state
   // Hebrew is the default language; English only if the visitor picked it.
@@ -430,16 +426,31 @@
     web_security: "bg-red-100 text-red-800"
   };
 
+  // The current language's version of each article, with plain text for searching.
+  function localPosts() {
+    return BLOG_POSTS.map(function (p) {
+      var v = p[lang] || p.en;
+      var text = v.body.map(function (b) { return typeof b[1] === "string" ? b[1] : b[1].join(" "); }).join(" ");
+      return { slug: p.slug, category: p.category, minutes: p.minutes, title: v.title, summary: v.summary, body: v.body, text: text };
+    });
+  }
+
   function filteredPosts() {
-    var posts = BLOG_POSTS.filter(function (p) { return !p.language || p.language === lang; });
+    var posts = localPosts();
     if (blogState.category !== "all") posts = posts.filter(function (p) { return p.category === blogState.category; });
     if (blogState.search) {
       var q = blogState.search.toLowerCase();
       posts = posts.filter(function (p) {
-        return (p.title || "").toLowerCase().indexOf(q) !== -1 || (p.content || "").toLowerCase().indexOf(q) !== -1;
+        return (p.title + " " + p.summary + " " + p.text).toLowerCase().indexOf(q) !== -1;
       });
     }
     return posts;
+  }
+
+  function postUrl(slug) { return pageUrl("Blog") + "?post=" + encodeURIComponent(slug); }
+
+  function categoryBadge(cat) {
+    return '<div class="' + BADGE + " " + (CATEGORY_COLORS[cat] || "bg-gray-100 text-gray-800") + '">' + esc(t("blog", cat)) + "</div>";
   }
 
   function renderBlogList() {
@@ -449,19 +460,55 @@
     return '<div class="space-y-6">' + posts.map(function (p) {
       return '<div class="' + CARD + '">' +
         '<div class="' + CARD_HEADER + '">' +
-          '<div class="' + BADGE + " mb-2 " + (CATEGORY_COLORS[p.category] || "bg-gray-100 text-gray-800") + '">' + esc((p.category || "").replace(/_/g, " ")) + "</div>" +
-          '<div class="tracking-tight text-xl font-bold">' + esc(p.title) + "</div>" +
+          '<div class="flex items-center gap-3 mb-2">' + categoryBadge(p.category) +
+            '<span class="text-xs text-gray-500">' + p.minutes + " " + C("minRead") + "</span></div>" +
+          '<a href="' + postUrl(p.slug) + '" class="tracking-tight text-xl font-bold hover:text-blue-700">' + esc(p.title) + "</a>" +
         "</div>" +
-        '<div class="' + CARD_CONTENT + '"><p class="text-gray-600">' + esc((p.content || "").substring(0, 200)) + "...</p></div>" +
-        '<div class="' + CARD_FOOTER + '"><button type="button" class="' + BTN + " " + BTN_OUTLINE + " " + SIZE_DEFAULT + ' mt-2">' + C("readMore") + chevron() + "</button></div>" +
+        '<div class="' + CARD_CONTENT + '"><p class="text-gray-600">' + esc(p.summary) + "</p></div>" +
+        '<div class="' + CARD_FOOTER + '"><a href="' + postUrl(p.slug) + '" class="' + BTN + " " + BTN_OUTLINE + " " + SIZE_DEFAULT + ' mt-2">' + C("readMore") + chevron() + "</a></div>" +
       "</div>";
     }).join("") + "</div>";
+  }
+
+  // "Bold part: rest" -> <strong>Bold part:</strong> rest
+  function richItem(text) {
+    var m = /^([^:]{2,60}):\s(.*)$/.exec(text);
+    return m ? "<strong>" + esc(m[1]) + ":</strong> " + esc(m[2]) : esc(text);
+  }
+
+  function renderArticle(slug) {
+    var C = function (k) { return esc(t("blog", k)); };
+    var post = localPosts().filter(function (p) { return p.slug === slug; })[0];
+    var back = '<a href="' + pageUrl("Blog") + '" class="inline-flex items-center gap-1 text-sm text-blue-700 hover:underline mb-6">' +
+      icon("chevron-right", (dir() === "rtl" ? "" : "rotate-180") + " h-4 w-4") + C("backToBlog") + "</a>";
+    if (!post) return '<div class="max-w-3xl mx-auto" dir="' + dir() + '">' + back + '<p class="text-gray-600">' + C("notFound") + "</p></div>";
+    var body = post.body.map(function (b) {
+      if (b[0] === "h") return "<h2>" + esc(b[1]) + "</h2>";
+      if (b[0] === "p") return "<p>" + esc(b[1]) + "</p>";
+      if (b[0] === "ul" || b[0] === "ol") return "<" + b[0] + ">" + b[1].map(function (x) { return "<li>" + richItem(x) + "</li>"; }).join("") + "</" + b[0] + ">";
+      if (b[0] === "tip") return '<div class="article-tip">' + richItem(b[1]) + "</div>";
+      return "";
+    }).join("");
+    return '<div class="max-w-3xl mx-auto" dir="' + dir() + '">' + back +
+      '<article class="' + CARD + ' article">' +
+        '<div class="flex items-center gap-3 mb-4">' + categoryBadge(post.category) +
+          '<span class="text-sm text-gray-500">' + post.minutes + " " + C("minRead") + "</span></div>" +
+        '<h1 class="article-title">' + esc(post.title) + "</h1>" +
+        '<p class="article-lead">' + esc(post.summary) + "</p>" +
+        '<div class="article-body">' + body + "</div>" +
+      "</article>" +
+      '<div class="article-cta">' +
+        '<h2 class="text-xl font-bold mb-2">' + C("ctaTitle") + "</h2>" +
+        '<p class="text-gray-600 mb-4">' + C("ctaText") + "</p>" +
+        '<a href="' + pageUrl("Contact") + '" class="' + BTN + " " + BTN_BLUE + " " + SIZE_LG + '">' + C("ctaButton") + chevron() + "</a>" +
+      "</div>" +
+    "</div>";
   }
 
   function renderBlogTabs() {
     var C = function (k) { return esc(t("blog", k)); };
     var cats = [
-      { id: "all", label: "All" },
+      { id: "all", label: C("all") },
       { id: "cybersecurity", label: C("cybersecurity") },
       { id: "programming", label: C("programming") },
       { id: "ethical_hacking", label: C("ethical_hacking") },
@@ -477,6 +524,7 @@
   }
 
   function renderBlog() {
+    if (CURRENT_POST) return renderArticle(CURRENT_POST);
     var C = function (k) { return esc(t("blog", k)); };
     var rtl = dir() === "rtl";
     return '<div class="max-w-6xl mx-auto" dir="' + dir() + '">' +
@@ -553,6 +601,10 @@
     document.documentElement.setAttribute("lang", lang);
     app.innerHTML = renderLayout((PAGES[PAGE] || renderHome)());
     document.title = PAGE_TITLES[PAGE][lang];
+    if (PAGE === "Blog" && CURRENT_POST) {
+      var post = localPosts().filter(function (p) { return p.slug === CURRENT_POST; })[0];
+      if (post) document.title = post.title + " | Cyber</>Coding";
+    }
   }
 
   function setLanguage(code) {

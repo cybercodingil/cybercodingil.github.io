@@ -21,7 +21,7 @@ No build step — plain HTML/CSS/JS.
 ## עריכת תוכן / Editing content
 
 - **Texts:** edit the `T` object at the top of `assets/js/app.js` (each section has `en` and `he`).
-- **Blog posts:** edit the `BLOG_POSTS` array in `assets/js/app.js` (`language`: `"en"` or `"he"`).
+- **Blog articles:** `assets/js/posts.js` – each article has a Hebrew and an English version side by side (instructions at the top of the file). Article links look like `Blog/?post=<slug>`.
 - **Link preview (WhatsApp/Facebook):** `assets/img/og-image.jpg` (1200×630) and the `og:` tags in each page's `index.html`.
 - **Default language:** Hebrew. Visitors' language choice is remembered in their browser.
 - **Contact links:** `WHATSAPP_NUMBER`, `FACEBOOK_URL`, `LINKEDIN_URL` at the top of `assets/js/app.js`.
