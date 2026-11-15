@@ -261,7 +261,7 @@
         '<div class="text-center text-sm text-gray-500">© ' + new Date().getFullYear() + " Cyber&lt;/&gt;Coding. " + L("allRightsReserved") + ".</div>" +
       "</div></footer>" +
       // Floating WhatsApp button (bottom-right corner in both languages; see .whatsapp-float in site.css).
-      '<a href="https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(L("whatsappText")) + '" target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="' + esc(L("whatsappLabel")) + '" title="' + esc(L("whatsappLabel")) + '">' +
+      '<a href="https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(L("whatsappText")) + '" target="_blank" rel="noopener noreferrer" class="whatsapp-float" data-umami-event="whatsapp-floating-button" aria-label="' + esc(L("whatsappLabel")) + '" title="' + esc(L("whatsappLabel")) + '">' +
         icon("message-circle", "", 28) + "</a>" +
     "</div>";
   }
@@ -308,7 +308,7 @@
           '<ul class="app-promo-list">' +
             ["appPointLang", "appPoint1", "appPoint2", "appPoint3"].map(function (k) { return "<li>" + a(k) + "</li>"; }).join("") +
           "</ul>" +
-          '<a class="app-cta" href="' + CODE_IOT_URL + '" target="_blank" rel="noopener noreferrer">' + a("appCta") + "</a>" +
+          '<a class="app-cta" data-umami-event="code-iot-app" href="' + CODE_IOT_URL + '" target="_blank" rel="noopener noreferrer">' + a("appCta") + "</a>" +
         "</div>" +
       "</div>" +
     "</div></section>";
@@ -343,8 +343,8 @@
         '<h1 class="text-4xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-cyan-500 pb-4">' + a("heroTitle") + "</h1>" +
         '<p class="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto">' + a("heroSubtitle") + "</p>" +
         '<div class="flex flex-col sm:flex-row justify-center gap-4">' +
-          '<a href="' + pageUrl("AboutMe") + '" class="' + BTN + " " + BTN_BLUE + " " + SIZE_LG + ' w-full sm:w-auto">' + a("exploreAboutMe") + chevron() + "</a>" +
-          '<a href="' + pageUrl("Contact") + '" class="' + BTN + " " + BTN_OUTLINE + " " + SIZE_LG + ' w-full sm:w-auto">' + a("contactMe") + "</a>" +
+          '<a data-umami-event="home-about-button" href="' + pageUrl("AboutMe") + '" class="' + BTN + " " + BTN_BLUE + " " + SIZE_LG + ' w-full sm:w-auto">' + a("exploreAboutMe") + chevron() + "</a>" +
+          '<a data-umami-event="home-contact-button" href="' + pageUrl("Contact") + '" class="' + BTN + " " + BTN_OUTLINE + " " + SIZE_LG + ' w-full sm:w-auto">' + a("contactMe") + "</a>" +
         "</div>" +
       "</div></div></section>" +
 
@@ -375,7 +375,7 @@
       '<section class="py-12"><div class="text-center">' +
         '<h2 class="text-3xl font-bold mb-6">' + a("readyToStart") + "</h2>" +
         '<p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">' + a("takeFirstStep") + "</p>" +
-        '<a href="' + pageUrl("Contact") + '" class="' + BTN + " " + BTN_BLUE + " " + SIZE_LG + '">' + a("getStartedNow") + chevron() + "</a>" +
+        '<a data-umami-event="home-get-started-button" href="' + pageUrl("Contact") + '" class="' + BTN + " " + BTN_BLUE + " " + SIZE_LG + '">' + a("getStartedNow") + chevron() + "</a>" +
       "</div></section>" +
     "</div>";
   }
@@ -502,7 +502,7 @@
       '<div class="article-cta">' +
         '<h2 class="text-xl font-bold mb-2">' + C("ctaTitle") + "</h2>" +
         '<p class="text-gray-600 mb-4">' + C("ctaText") + "</p>" +
-        '<a href="' + pageUrl("Contact") + '" class="' + BTN + " " + BTN_BLUE + " " + SIZE_LG + '">' + C("ctaButton") + chevron() + "</a>" +
+        '<a data-umami-event="article-contact-button" href="' + pageUrl("Contact") + '" class="' + BTN + " " + BTN_BLUE + " " + SIZE_LG + '">' + C("ctaButton") + chevron() + "</a>" +
       "</div>" +
     "</div>";
   }
@@ -550,7 +550,7 @@
   function renderContact() {
     var g = function (k) { return esc(t("contact", k)); };
     var social = function (href, cls, ic, label) {
-      return '<a href="' + href + '" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2 rounded-md ' + cls + ' text-white transition-colors">' +
+      return '<a data-umami-event="contact-page-' + ic.replace("message-circle", "whatsapp") + '" href="' + href + '" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2 rounded-md ' + cls + ' text-white transition-colors">' +
         icon(ic, "", 20) + label + "</a>";
     };
     var field = function (id, type, label, required) {
@@ -612,7 +612,13 @@
   function setLanguage(code) {
     lang = code === "he" ? "he" : "en";
     try { localStorage.setItem("language", lang); } catch (e) { /* storage blocked */ }
+    track("language-" + lang);
     render();
+  }
+
+  // Umami analytics custom event (no-op if the analytics script is blocked or not loaded yet).
+  function track(name) {
+    try { if (window.umami && typeof window.umami.track === "function") window.umami.track(name); } catch (e) { /* ignore */ }
   }
 
   app.addEventListener("click", function (e) {
@@ -646,6 +652,7 @@
     ].filter(function (x) { return x !== null; }).join("\n");
     window.open("https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(text), "_blank", "noopener");
     contactSent = true;
+    track("contact-form-sent");
     render();
   }
 
@@ -670,6 +677,7 @@
     }).then(function (res) {
       if (!res.ok) throw new Error("Formspree responded " + res.status);
       contactSent = true;
+      track("contact-form-sent");
     }).catch(function (err) {
       console.error("Error submitting form", err);
       contactError = true;
