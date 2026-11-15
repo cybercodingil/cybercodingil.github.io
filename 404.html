@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cyber&lt;/&gt;Coding</title>
+  <script>
+    // Redirect old / differently-cased links (e.g. /aboutme) to the right page; anything else goes home.
+    (function () {
+      var pages = ["AboutMe", "Blog", "Contact", "Home"];
+      var parts = location.pathname.split("/").filter(Boolean);
+      for (var i = parts.length - 1; i >= 0; i--) {
+        for (var j = 0; j < pages.length; j++) {
+          if (parts[i].toLowerCase() === pages[j].toLowerCase()) {
+            var base = "/" + parts.slice(0, i).join("/") + (i ? "/" : "");
+            location.replace(base + (pages[j] === "Home" ? "" : pages[j] + "/"));
+            return;
+          }
+        }
+      }
+      // GitHub project sites live under /<repo>/; keep that prefix when going home.
+      var prefix = location.hostname.endsWith("github.io") && parts.length ? "/" + parts[0] + "/" : "/";
+      location.replace(prefix);
+    })();
+  </script>
+</head>
+<body></body>
+</html>

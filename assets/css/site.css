@@ -1,0 +1,34 @@
+/* Custom styles from the original site (layout + home page) */
+:root { --neon-blue: #00f3ff; }
+.neon-text { color: var(--neon-blue); }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .7; } }
+.animate-pulse { animation: pulse 3s infinite; }
+
+.glitch-container { position: relative; display: inline-block; }
+.glitch-image {
+  position: relative;
+  animation: breathing 4s ease-in-out infinite, subtle-move 8s ease-in-out infinite;
+  transform-origin: center bottom;
+}
+.glitch-container:hover .glitch-image {
+  animation: breathing 2s ease-in-out infinite, head-tilt 3s ease-in-out infinite;
+}
+@keyframes breathing {
+  0%, 100% { transform: scale(1) translateY(0); }
+  50% { transform: scale(1.02) translateY(-5px); }
+}
+@keyframes head-tilt {
+  0%, 100% { transform: rotate(0deg) translateX(0); }
+  25% { transform: rotate(1deg) translateX(2px); }
+  75% { transform: rotate(-1deg) translateX(-2px); }
+}
+@keyframes subtle-move {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  25% { transform: translateY(-3px) translateX(2px); }
+  50% { transform: translateY(-5px) translateX(0); }
+  75% { transform: translateY(-3px) translateX(-2px); }
+}
+@keyframes blink { 0%, 90%, 100% { opacity: 1; } 95% { opacity: .3; } }
+
+/* Avoid sideways scrolling on small phones */
+html, body { overflow-x: hidden; }
