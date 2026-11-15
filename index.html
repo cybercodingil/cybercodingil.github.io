@@ -1,23 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="he" dir="rtl">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cyber&lt;/&gt;Coding</title>
-  <meta name="description" content="Private and group lessons in cybersecurity and programming for all ages, through practical training and personal guidance.">
+  <title>Cyber&lt;/&gt;Coding | שיעורים פרטיים בסייבר ותכנות</title>
+  <meta name="description" content="שיעורים פרטיים וקבוצתיים באבטחת מידע ותכנות בפייתון לכל הגילאים, באמצעות הדרכה מעשית והכוונה אישית.">
+  <link rel="canonical" href="https://t-code-now.github.io/cyber_coding_webpage/">
   <meta name="theme-color" content="#2563eb">
+
+  <!-- Link previews (WhatsApp, Facebook, LinkedIn, X) -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Cyber&lt;/&gt;Coding">
+  <meta property="og:locale" content="he_IL">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:title" content="Cyber&lt;/&gt;Coding | שיעורים פרטיים בסייבר ותכנות">
+  <meta property="og:description" content="שיעורים פרטיים וקבוצתיים באבטחת מידע ותכנות בפייתון לכל הגילאים, באמצעות הדרכה מעשית והכוונה אישית.">
+  <meta property="og:url" content="https://t-code-now.github.io/cyber_coding_webpage/">
+  <meta property="og:image" content="https://t-code-now.github.io/cyber_coding_webpage/assets/img/share.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Cyber&lt;/&gt;Coding – עולם התכנות והסייבר">
+  <meta name="twitter:card" content="summary_large_image">
+
   <link rel="icon" type="image/png" href="./assets/img/favicon.png">
   <link rel="apple-touch-icon" href="./assets/img/favicon.png">
   <link rel="stylesheet" href="./assets/css/tailwind.css">
   <link rel="stylesheet" href="./assets/css/site.css">
   <script>
-    // Apply the saved language direction before first paint (avoids a flash of LTR in Hebrew).
-    try { if (localStorage.getItem("language") === "he") { document.documentElement.dir = "rtl"; document.documentElement.lang = "he"; } } catch (e) {}
+    // Hebrew is the default; switch direction before first paint if the visitor chose English.
+    try { if (localStorage.getItem("language") === "en") { document.documentElement.dir = "ltr"; document.documentElement.lang = "en"; } } catch (e) {}
   </script>
 </head>
 <body data-page="Home" data-root="./">
   <div id="app"></div>
-  <noscript>Please enable JavaScript to view this site.</noscript>
+  <noscript>יש להפעיל JavaScript כדי לצפות באתר. Please enable JavaScript to view this site.</noscript>
   <script src="./assets/js/app.js" defer></script>
 </body>
 </html>

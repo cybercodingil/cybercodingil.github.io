@@ -57,8 +57,10 @@
   // ---------------------------------------------------------------- translations
   var T = {
     layout: {
-      en: { home: "Home", aboutMe: "About Me", blog: "Blog", contact: "Contact", allRightsReserved: "All rights reserved" },
-      he: { home: "דף הבית", aboutMe: "אודותיי", blog: "בלוג", contact: "צור קשר", allRightsReserved: "כל הזכויות שמורות" }
+      en: { home: "Home", aboutMe: "About Me", blog: "Blog", contact: "Contact", allRightsReserved: "All rights reserved",
+            whatsappLabel: "Chat with me on WhatsApp", whatsappText: "Hi, I found your website and would like to hear more about lessons." },
+      he: { home: "דף הבית", aboutMe: "אודותיי", blog: "בלוג", contact: "צור קשר", allRightsReserved: "כל הזכויות שמורות",
+            whatsappLabel: "שלחו לי הודעה בוואטסאפ", whatsappText: "היי, הגעתי מהאתר ואשמח לשמוע פרטים על השיעורים." }
     },
     home: {
       en: {
@@ -172,8 +174,9 @@
   ];
 
   // ---------------------------------------------------------------- state
-  var lang = "en";
-  try { lang = localStorage.getItem("language") === "he" ? "he" : "en"; } catch (e) { /* storage blocked */ }
+  // Hebrew is the default language; English only if the visitor picked it.
+  var lang = "he";
+  try { lang = localStorage.getItem("language") === "en" ? "en" : "he"; } catch (e) { /* storage blocked */ }
   var menuOpen = false;
   var blogState = { search: "", category: "all" };
   var contactSent = false;
@@ -245,6 +248,9 @@
       '<footer class="bg-white border-t border-gray-200 mt-12"><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">' +
         '<div class="text-center text-sm text-gray-500">© ' + new Date().getFullYear() + " Cyber&lt;/&gt;Coding. " + L("allRightsReserved") + ".</div>" +
       "</div></footer>" +
+      // Floating WhatsApp button, on the end side of the reading direction (right in English, left in Hebrew).
+      '<a href="https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(L("whatsappText")) + '" target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="' + esc(L("whatsappLabel")) + '" title="' + esc(L("whatsappLabel")) + '">' +
+        icon("message-circle", "", 28) + "</a>" +
     "</div>";
   }
 
@@ -465,6 +471,13 @@
 
   var PAGES = { Home: renderHome, AboutMe: renderAbout, Blog: renderBlog, Contact: renderContact };
 
+  var PAGE_TITLES = {
+    Home: { he: "Cyber</>Coding | שיעורים פרטיים בסייבר ותכנות", en: "Cyber</>Coding | Private Cybersecurity & Programming Lessons" },
+    AboutMe: { he: "אודותיי | Cyber</>Coding", en: "About Me | Cyber</>Coding" },
+    Blog: { he: "בלוג ומשאבים | Cyber</>Coding", en: "Blog & Resources | Cyber</>Coding" },
+    Contact: { he: "צור קשר | Cyber</>Coding", en: "Contact | Cyber</>Coding" }
+  };
+
   // ---------------------------------------------------------------- render + events
   var app = document.getElementById("app");
 
@@ -472,6 +485,7 @@
     document.documentElement.setAttribute("dir", dir());
     document.documentElement.setAttribute("lang", lang);
     app.innerHTML = renderLayout((PAGES[PAGE] || renderHome)());
+    document.title = PAGE_TITLES[PAGE][lang];
   }
 
   function setLanguage(code) {
