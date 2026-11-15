@@ -8,6 +8,8 @@
   var WHATSAPP_NUMBER = "9720528372666";
   var FACEBOOK_URL = "https://www.facebook.com/profile.php?id=100007702515504";
   var LINKEDIN_URL = "https://www.linkedin.com/in/tamir-maidani-b21814266";
+  // Formspree form ID (the part after https://formspree.io/f/). While empty, the form falls back to WhatsApp.
+  var FORMSPREE_FORM_ID = "";
 
   var ROOT = document.body.getAttribute("data-root") || "./";
   var PAGE = document.body.getAttribute("data-page") || "Home";
@@ -153,8 +155,8 @@
       he: { blogTitle: "בלוג ומשאבים", blogSubtitle: "מאמרים, הדרכות ומשאבים אחרונים בנושא אבטחת סייבר ותכנות", readMore: "קרא עוד", categories: "קטגוריות", cybersecurity: "אבטחת סייבר", programming: "תכנות", ethical_hacking: "האקינג אתי", web_security: "אבטחת אתרים", searchPlaceholder: "חפש מאמרים...", noBlogPosts: "לא נמצאו פוסטים בבלוג." }
     },
     contact: {
-      en: { contactTitle: "Contact Me", contactSubtitle: "Have questions? Fill out the form below to get in touch with me directly.", contactMe: "Contact Me", yourName: "Your Name", yourEmail: "Your Email", yourPhone: "Your Phone", yourMessage: "Your Message", submit: "Submit", thankYou: "Thank you for your message!", getBackToYou: "I'll get back to you as soon as possible.", connectWithMe: "Connect With Me", facebook: "Facebook", whatsapp: "WhatsApp", linkedin: "LinkedIn" },
-      he: { contactTitle: "צור קשר", contactSubtitle: "יש לך שאלות? מלא את הטופס למטה כדי ליצור איתי קשר ישירות.", contactMe: "צור קשר", yourName: "השם שלך", yourEmail: "האימייל שלך", yourPhone: "הטלפון שלך", yourMessage: "ההודעה שלך", submit: "שלח", thankYou: "תודה על ההודעה שלך!", getBackToYou: "אחזור אליך בהקדם האפשרי.", connectWithMe: "התחבר איתי", facebook: "פייסבוק", whatsapp: "וואטסאפ", linkedin: "לינקדאין" }
+      en: { contactTitle: "Contact Me", contactSubtitle: "Have questions? Fill out the form below to get in touch with me directly.", contactMe: "Contact Me", yourName: "Your Name", yourEmail: "Your Email", yourPhone: "Your Phone", yourMessage: "Your Message", submit: "Submit", thankYou: "Thank you for your message!", getBackToYou: "I'll get back to you as soon as possible.", sending: "Sending...", sendError: "Something went wrong and the message was not sent. Please try again, or contact me on WhatsApp.", connectWithMe: "Connect With Me", facebook: "Facebook", whatsapp: "WhatsApp", linkedin: "LinkedIn" },
+      he: { contactTitle: "צור קשר", contactSubtitle: "יש לך שאלות? מלא את הטופס למטה כדי ליצור איתי קשר ישירות.", contactMe: "צור קשר", yourName: "השם שלך", yourEmail: "האימייל שלך", yourPhone: "הטלפון שלך", yourMessage: "ההודעה שלך", submit: "שלח", thankYou: "תודה על ההודעה שלך!", getBackToYou: "אחזור אליך בהקדם האפשרי.", sending: "שולח...", sendError: "משהו השתבש וההודעה לא נשלחה. נסה שוב, או צור איתי קשר בוואטסאפ.", connectWithMe: "התחבר איתי", facebook: "פייסבוק", whatsapp: "וואטסאפ", linkedin: "לינקדאין" }
     }
   };
 
@@ -175,6 +177,8 @@
   var menuOpen = false;
   var blogState = { search: "", category: "all" };
   var contactSent = false;
+  var contactSending = false;
+  var contactError = false;
 
   function dir() { return lang === "he" ? "rtl" : "ltr"; }
   function t(section, key) { return (T[section][lang] && T[section][lang][key]) || key; }
@@ -222,9 +226,8 @@
     return '<div class="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 text-gray-900 ' + (dir() === "rtl" ? "text-right" : "text-left") + '">' +
       '<nav class="bg-white border-b border-gray-200">' +
         '<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"><div class="flex justify-between h-16">' +
-          '<div class="flex items-center"><a href="' + pageUrl("Home") + '" class="flex items-center">' +
-            '<img src="' + IMG + 'profile.jpg" alt="Logo" class="h-8 w-8 rounded-full object-cover">' +
-            '<span class="ml-2 font-bold text-xl">Cyber&lt;/&gt;Coding</span></a></div>' +
+          // Logo + site name removed at the owner's request; the empty div keeps the menu on the same side.
+          '<div class="flex items-center"></div>' +
           '<div class="hidden md:flex items-center space-x-4">' +
             nav.map(function (n) { return '<a href="' + pageUrl(n.page) + '" class="px-3 py-2 rounded-md hover:bg-gray-100">' + L(n.id) + "</a>"; }).join("") +
             '<div class="flex items-center gap-2">' + langBtn("en", "English") + langBtn("he", "עברית") + "</div>" +
@@ -450,7 +453,10 @@
               field("phone", "tel", g("yourPhone"), false) +
               '<div class="space-y-2"><label for="message" class="' + LABEL + '">' + g("yourMessage") + "</label>" +
                 '<textarea id="message" name="message" rows="5" class="' + TEXTAREA + '" required></textarea></div>' +
-              '<button type="submit" class="' + BTN + " " + BTN_BLUE + " " + SIZE_DEFAULT + ' w-full">' + g("submit") + "</button>" +
+              // Hidden honeypot field: bots fill it in, people don't, and Formspree drops those submissions.
+              '<input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">' +
+              (contactError ? '<div role="alert" class="bg-red-50 text-red-800 p-4 rounded-md text-center">' + g("sendError") + "</div>" : "") +
+              '<button type="submit" class="' + BTN + " " + BTN_BLUE + " " + SIZE_DEFAULT + ' w-full"' + (contactSending ? " disabled" : "") + ">" + g(contactSending ? "sending" : "submit") + "</button>" +
             "</form>") +
         "</div>" +
       "</div>" +
@@ -495,11 +501,7 @@
     }
   });
 
-  app.addEventListener("submit", function (e) {
-    if (e.target.id !== "contact-form") return;
-    e.preventDefault();
-    var f = e.target;
-    // GitHub Pages is static hosting (no server), so the form sends the message via WhatsApp.
+  function sendViaWhatsApp(f) {
     var text = [
       t("contact", "yourName") + ": " + f.name.value,
       t("contact", "yourEmail") + ": " + f.email.value,
@@ -510,6 +512,52 @@
     window.open("https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(text), "_blank", "noopener");
     contactSent = true;
     render();
+  }
+
+  function sendViaFormspree(f) {
+    var data = {
+      name: f.name.value,
+      email: f.email.value,
+      phone: f.phone.value,
+      message: f.message.value,
+      _gotcha: f._gotcha.value,
+      _subject: "Cyber</>Coding – new message from " + f.name.value
+    };
+    var keep = { name: data.name, email: data.email, phone: data.phone, message: data.message };
+    contactSending = true;
+    contactError = false;
+    render();
+    restoreForm(keep);
+    fetch("https://formspree.io/f/" + FORMSPREE_FORM_ID, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify(data)
+    }).then(function (res) {
+      if (!res.ok) throw new Error("Formspree responded " + res.status);
+      contactSent = true;
+    }).catch(function (err) {
+      console.error("Error submitting form", err);
+      contactError = true;
+    }).then(function () {
+      contactSending = false;
+      render();
+      if (!contactSent) restoreForm(keep);
+    });
+  }
+
+  // Re-rendering rebuilds the form, so put back what the visitor typed.
+  function restoreForm(values) {
+    var f = document.getElementById("contact-form");
+    if (!f) return;
+    Object.keys(values).forEach(function (k) { if (f[k]) f[k].value = values[k]; });
+  }
+
+  app.addEventListener("submit", function (e) {
+    if (e.target.id !== "contact-form") return;
+    e.preventDefault();
+    if (contactSending) return;
+    if (FORMSPREE_FORM_ID) sendViaFormspree(e.target);
+    else sendViaWhatsApp(e.target);
   });
 
   render();

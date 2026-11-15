@@ -26,8 +26,9 @@ No build step — plain HTML/CSS/JS.
 
 ## Contact form
 
-GitHub Pages is static hosting with no server, so the contact form opens WhatsApp with
-the visitor's details and message pre-filled (instead of saving to the Base44 database).
+GitHub Pages has no server, so the form sends messages by email through [Formspree](https://formspree.io).
+Set `FORMSPREE_FORM_ID` at the top of `assets/js/app.js` to your form ID (the part after `https://formspree.io/f/`).
+While it is empty, the form opens WhatsApp with the visitor's details and message pre-filled instead.
 
 ## Deploy
 
