@@ -22,7 +22,7 @@ No build step — plain HTML/CSS/JS.
 
 - **Texts:** edit the `T` object at the top of `assets/js/app.js` (each section has `en` and `he`).
 - **Blog posts:** edit the `BLOG_POSTS` array in `assets/js/app.js` (`language`: `"en"` or `"he"`).
-- **Link preview (WhatsApp/Facebook):** `assets/img/share.jpg` (1200×630) and the `og:` tags in each page's `index.html`.
+- **Link preview (WhatsApp/Facebook):** `assets/img/og-image.jpg` (1200×630) and the `og:` tags in each page's `index.html`.
 - **Default language:** Hebrew. Visitors' language choice is remembered in their browser.
 - **Contact links:** `WHATSAPP_NUMBER`, `FACEBOOK_URL`, `LINKEDIN_URL` at the top of `assets/js/app.js`.
 
