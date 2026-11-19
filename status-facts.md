@@ -83,7 +83,7 @@ Entries added later also end with `| Source: <url> ; <url>` (see SKILL.md step 1
 ## Used (newest last)
 
 Facts already posted as a status. Prefer facts NOT listed here.
-Total facts: 61 | unused: 50
+Total facts: 61 | unused: 49
 
 - 2026-11-19 | first-bug-moth
 - 2026-11-19 | python-monty-python
@@ -96,3 +96,4 @@ Total facts: 61 | unused: 50
 - 2026-11-19 | phishing-ph
 - 2026-11-19 | rubber-duck
 - 2026-11-19 | caesar-cipher
+- 2026-11-20 | voyager-updates
