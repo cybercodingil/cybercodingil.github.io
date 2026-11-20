@@ -180,7 +180,7 @@ Entries added later also end with `| Source: <url> ; <url>` (see SKILL.md step 1
 ## Used (newest last)
 
 Facts already posted as a status. Prefer facts NOT listed here.
-Total facts: 130 | unused: 112
+Total facts: 130 | unused: 111
 
 - 2026-11-19 | first-bug-moth
 - 2026-11-19 | python-monty-python
@@ -201,3 +201,4 @@ Total facts: 130 | unused: 112
 - 2026-11-20 | variable
 - 2026-11-20 | python-what
 - 2026-11-20 | worm-basics
+- 2026-11-20 | list-basics
