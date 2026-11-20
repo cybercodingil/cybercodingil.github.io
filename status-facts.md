@@ -12,7 +12,7 @@ Rules for using this file:
 - Any code, command, hash or payload shown in an image must be real and correct (run it / compute it if needed).
 - Categories (tags) – the statuses rotate through them in this order (see SKILL.md):
   `attack` → `cyber-concept` → `code-build` → `cyber-tool` → `code-concept` → `cyber-tip` → `history`
-- When every id has been used (see history.md), start again from the id used longest ago, with a NEW design.
+- **No repeats, ever:** a fact id that is in history.md (the "Used" list) is never used again, and every image is drawn from scratch – never reuse or edit an earlier image. When few ids are left, the bank grows with new verified facts (SKILL.md step 1b).
 - The **Archive** section at the end is NOT used for new statuses (off-topic for Tamir's audience).
 
 - **Levels** – each entry has a difficulty level, so the audience is introduced gradually (see SKILL.md "Level progression"):
