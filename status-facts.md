@@ -38,6 +38,7 @@ Entries added later also end with `| Source: <url> ; <url>` (see SKILL.md step 1
 - `stuxnet` [attack] (L2) — Say: Stuxnet is known as the first cyber weapon to cause physical damage – it sabotaged uranium-enrichment centrifuges. | Don't say: who built it. | Visual: spinning centrifuge outlines with one wobbling, code overlay.
 - `heartbleed` [attack] (L3) — Say: Heartbleed (2014) was a bug in OpenSSL, a library that protects a huge part of the web, that let attackers read pieces of a server's memory. | Don't say: percentages of the internet. | Visual: bleeding-heart icon made of code, memory blocks leaking.
 - `morris-worm` [attack] (L2) — Say: The Morris worm (1988), one of the first internet worms, spread so fast that it slowed down a large part of the internet of that time; its author was the first person convicted under the US computer-fraud law. | Don't say: exact numbers of computers. | Visual: network map lighting up node by node.
+- `melissa-virus` [attack] (L1) — Say: The Melissa virus (March 1999) came in an infected Microsoft Word document by email. When someone opened it, it used Outlook to send itself to the first 50 people in their address book – so the emails looked like they came from someone you know. The flood of emails overloaded mail servers. | Don't say: damage figures; the author's name or sentence; where it was first posted. | Visual: explainer – email "Important Message From…" with attachment `list.doc` → laptop opening Word → 50 envelopes fanning out to contact icons, overloaded mail server. | Source: https://en.wikipedia.org/wiki/Melissa_(computer_virus) ; https://en.wikipedia.org/wiki/Timeline_of_computer_viruses_and_worms
 
 ## Cyber concepts explained [cyber-concept]
 
@@ -162,7 +163,7 @@ Entries added later also end with `| Source: <url> ; <url>` (see SKILL.md step 1
 ## Used (newest last)
 
 Facts already posted as a status. Prefer facts NOT listed here.
-Total facts: 112 | unused: 98
+Total facts: 113 | unused: 98
 
 - 2026-11-19 | first-bug-moth
 - 2026-11-19 | python-monty-python
@@ -179,3 +180,4 @@ Total facts: 112 | unused: 98
 - 2026-11-20 | mirai-botnet
 - 2026-11-20 | ransomware
 - 2026-11-20 | eve-online-python
+- 2026-11-20 | melissa-virus
