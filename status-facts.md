@@ -78,6 +78,7 @@ Entries added later also end with `| Source: <url> ; <url>` (see SKILL.md step 1
 - `web-trio` [code-build] (L1) — Say: Every website is built from three layers: HTML (structure), CSS (design) and JavaScript (behaviour). | Don't say: that every site uses frameworks. | Visual: exploded 3-layer view of one web page – skeleton (HTML), painted layer (CSS), moving gears (JS).
 - `raspberry-pi-python` [code-build] (L1) — Say: With code you can control real things: on a Raspberry Pi or Arduino a few lines can turn on lights, read sensors or drive a robot. Python is the main language on Raspberry Pi. | Don't say: prices. | Visual: small board with wires to an LED, a servo and a sensor, code `led.on()` glowing.
 - `python-scraping` [code-build] (L2) — Say: With Python you can write a program that collects information from websites automatically – prices, weather, news – this is called web scraping. Always respect each site's rules. | Don't say: that it is always allowed. | Visual: spider-robot crawling across browser windows pulling data into a table.
+- `eve-online-python` [code-build] (L1) — Say: Both the server and the game software of EVE Online, an online space game, are developed in Stackless Python – a variant of the Python language. | Don't say: player numbers; that it is "the biggest" game; other games' claims not in the sources. | Visual: spaceships in battle above a planet, with a code editor showing real Stackless Python (`import stackless`, `stackless.tasklet(...)`) driving the ships. | Source: https://en.wikipedia.org/wiki/Eve_Online ; https://en.wikipedia.org/wiki/List_of_Python_software
 
 ## Cyber tools [cyber-tool]
 
@@ -161,7 +162,7 @@ Entries added later also end with `| Source: <url> ; <url>` (see SKILL.md step 1
 ## Used (newest last)
 
 Facts already posted as a status. Prefer facts NOT listed here.
-Total facts: 111 | unused: 98
+Total facts: 112 | unused: 98
 
 - 2026-11-19 | first-bug-moth
 - 2026-11-19 | python-monty-python
@@ -177,3 +178,4 @@ Total facts: 111 | unused: 98
 - 2026-11-20 | voyager-updates
 - 2026-11-20 | mirai-botnet
 - 2026-11-20 | ransomware
+- 2026-11-20 | eve-online-python
