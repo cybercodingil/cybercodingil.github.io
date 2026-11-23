@@ -74,6 +74,8 @@ Entries added later also end with `| Source: <url> ; <url>` (see SKILL.md step 1
 - `hacker-basics` [cyber-concept] (L1) — Say: "Hacker" has two meanings: someone who breaks into computers without permission – and also a skilled expert who tests systems with permission and reports the holes (an ethical hacker). Example: a company hires an ethical hacker to find weaknesses before criminals do. | Don't say: names of real hackers. | Visual: split image – dark side: hooded figure breaking a lock; bright side: white-hat expert with a signed permission form and a report. | Source: https://en.wikipedia.org/wiki/Security_hacker ; https://en.wikipedia.org/wiki/Penetration_test
 - `spam-basics` [cyber-concept] (L1) — Say: Spam is mass unwanted messages sent to huge numbers of people – usually ads, and sometimes phishing in disguise. Example: an email "you won a prize!" for a contest you never entered. | Don't say: spam statistics. | Visual: inbox flooding with identical "זכית!" emails, a trash can and a spam filter funnel. | Source: https://en.wikipedia.org/wiki/Spamming ; https://en.wikipedia.org/wiki/Email_spam
 
+- `scareware-basics` [cyber-concept] (L1) — Say: Scareware is malware that uses fear: a sudden fake warning like "Your computer may be infected!" pushes you to click, download or buy a "security program" – but the virus is invented, and the program is useless or itself malicious. Example: a pop-up on a website saying your computer is infected and offering an immediate "scan". | Don't say: statistics; brand/product names; that every pop-up is scareware. | Visual: explainer – browser with a flashing red fake "infected!" pop-up and a "Scan now" button → fake "antivirus" download → payment/malware; a calm side note "close the window, don't click". | Source: https://en.wikipedia.org/wiki/Scareware ; https://en.wikipedia.org/wiki/Rogue_security_software
+
 ## What you can build with code [code-build]
 
 - `python-instagram` [code-build] (L1) — Say: Instagram's servers are built with Python, using the Django web framework – the same language beginners start with. | Don't say: user numbers. | Visual: phone with a photo feed whose back panel opens to reveal Python code `from django…`.
@@ -180,7 +182,7 @@ Entries added later also end with `| Source: <url> ; <url>` (see SKILL.md step 1
 ## Used (newest last)
 
 Facts already posted as a status. Prefer facts NOT listed here.
-Total facts: 130 | unused: 109
+Total facts: 131 | unused: 109
 
 - 2026-11-19 | first-bug-moth
 - 2026-11-19 | python-monty-python
@@ -204,3 +206,4 @@ Total facts: 130 | unused: 109
 - 2026-11-20 | list-basics
 - 2026-11-20 | phishing-basics
 - 2026-11-22 | loop
+- 2026-11-23 | scareware-basics
