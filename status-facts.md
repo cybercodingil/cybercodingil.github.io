@@ -132,6 +132,8 @@ Entries added later also end with `| Source: <url> ; <url>` (see SKILL.md step 1
 - `bug-basics` [code-concept] (L1) — Say: A bug is a mistake in code. It can be tiny – `print("Hello"` without the closing bracket gives a SyntaxError – or it can make a whole program crash. Finding and fixing bugs is called debugging. | Don't say: the NIST cost figure. | Visual: editor with the missing bracket highlighted red, error message `SyntaxError: '(' was never closed`, a magnifying glass. | Source: https://en.wikipedia.org/wiki/Software_bug ; https://en.wikipedia.org/wiki/Debugging
 - `algorithm-basics` [code-concept] (L1) — Say: An algorithm is an exact step-by-step recipe for solving a problem. Example – finding the biggest number: go over the numbers one by one and remember the biggest so far. In Python: `max([3, 9, 4])` gives 9. | Don't say: n/a. | Visual: explainer – three cards 3, 9, 4 with a pointer moving along and a "biggest so far" badge ending on 9. | Source: https://en.wikipedia.org/wiki/Algorithm ; https://en.wikipedia.org/wiki/Python_(programming_language)
 
+- `dictionary-basics` [code-concept] (L1) — Say: In Python a dictionary (dict) stores pairs of a key and a value, written with curly braces `{key: value}` – like a phone book: you look up by the name (the key) and get the information (the value). Example: `ages = {"Dana": 15, "Yossi": 12}` then `ages["Dana"]` gives 15. | Don't say: performance numbers; that keys can be anything (they must be immutable, e.g. strings or numbers). | Visual: explainer – code `ages = {"Dana": 15, "Yossi": 12}` → cabinet of drawers with name tags (keys) holding values → terminal `ages["Dana"]` → `15`. | Source: https://en.wikipedia.org/wiki/Associative_array ; https://en.wikipedia.org/wiki/Python_syntax_and_semantics
+
 ## Cyber tips [cyber-tip]
 
 - `password-123456` [cyber-tip] (L1) — Say: "123456" keeps appearing at the top of lists of the most common leaked passwords. | Don't say: "the most common password in the world" as a single-source fact. | Visual: open padlock + password field `123456`.
@@ -182,7 +184,7 @@ Entries added later also end with `| Source: <url> ; <url>` (see SKILL.md step 1
 ## Used (newest last)
 
 Facts already posted as a status. Prefer facts NOT listed here.
-Total facts: 131 | unused: 109
+Total facts: 132 | unused: 110
 
 - 2026-11-19 | first-bug-moth
 - 2026-11-19 | python-monty-python
