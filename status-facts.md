@@ -184,7 +184,7 @@ Entries added later also end with `| Source: <url> ; <url>` (see SKILL.md step 1
 ## Used (newest last)
 
 Facts already posted as a status. Prefer facts NOT listed here.
-Total facts: 132 | unused: 110
+Total facts: 132 | unused: 108
 
 - 2026-11-19 | first-bug-moth
 - 2026-11-19 | python-monty-python
@@ -209,3 +209,5 @@ Total facts: 132 | unused: 110
 - 2026-11-20 | phishing-basics
 - 2026-11-22 | loop
 - 2026-11-23 | scareware-basics
+- 2026-11-25 | dictionary-basics
+- 2026-11-26 | virus-basics
